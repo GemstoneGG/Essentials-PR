@@ -387,6 +387,8 @@ public interface ISettings extends IConf {
 
     boolean isConfirmHomeOverwrite();
 
+    boolean isForceHomeToDefaultHome();
+
     boolean infoAfterDeath();
 
     boolean isRespawnAtBed();

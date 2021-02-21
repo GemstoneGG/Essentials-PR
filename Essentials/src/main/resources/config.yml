@@ -718,6 +718,9 @@ spawn-if-no-home: true
 # Should players be asked to provide confirmation for homes which they attempt to overwrite?
 confirm-home-overwrite: false
 
+# Should /home command always teleport to the 'home' if multiple homes are set?
+force-home-to-default-home: false
+
 ############################################################
 # +------------------------------------------------------+ #
 # |                       Economy                        | #

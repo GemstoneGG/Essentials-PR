@@ -1759,6 +1759,11 @@ public class Settings implements net.ess3.api.ISettings {
     }
 
     @Override
+    public boolean isForceHomeToDefaultHome() {
+        return config.getBoolean("force-home-to-default-home", false);
+    }
+
+    @Override
     public boolean infoAfterDeath() {
         return config.getBoolean("send-info-after-death", false);
     }
