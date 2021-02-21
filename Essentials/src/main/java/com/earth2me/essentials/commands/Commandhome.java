@@ -89,6 +89,12 @@ public class Commandhome extends EssentialsCommand {
                     } catch (final Exception exception) {
                         showError(user.getBase(), exception, commandLabel);
                     }
+                } else if (ess.getSettings().isForceHomeToDefaultHome() && !commandLabel.endsWith("s") && finalPlayer.hasHome("home")) {
+                    try {
+                        goHome(user, finalPlayer, "home", charge, getNewExceptionFuture(user.getSource(), commandLabel));
+                    } catch (final Exception exception) {
+                        showError(user.getBase(), exception, commandLabel);
+                    }
                 } else {
                     final int count = homes.size();
                     if (user.isAuthorized("essentials.home.bed")) {
@@ -121,7 +127,7 @@ public class Commandhome extends EssentialsCommand {
     }
 
     private void goHome(final User user, final User player, final String home, final Trade charge, final CompletableFuture<Boolean> future) throws Exception {
-        if (home.length() < 1) {
+        if (home.isEmpty()) {
             throw new NotEnoughArgumentsException();
         }
         final Location loc = player.getHome(home);
