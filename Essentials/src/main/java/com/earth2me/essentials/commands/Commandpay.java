@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 import static com.earth2me.essentials.I18n.tl;
 
 public class Commandpay extends EssentialsLoopCommand {
-    private static final Pattern NUMBER_FORMAT = Pattern.compile("([0-9][0-9_'`,]*(?:\\.[0-9]+)?|\\.[0-9]+)([kmbt])?");
+    private static final Pattern AMOUNT_FORMAT = Pattern.compile("((?:[0-9][_'`,]?)+(?:\\.[0-9]+)?|\\.[0-9]+)([kmbt])?");
     private static final Pattern SANITIZE = Pattern.compile("[^0-9.]");
 
     private static final BigDecimal THOUSAND = new BigDecimal(1000);
@@ -38,11 +38,12 @@ public class Commandpay extends EssentialsLoopCommand {
             throw new NotEnoughArgumentsException();
         }
 
-        if (args[1].startsWith("-")) {
+        final String amountStr = args[1];
+        if (amountStr.startsWith("-")) {
             throw new Exception(tl("payMustBePositive"));
         }
 
-        final Matcher formatMatcher = NUMBER_FORMAT.matcher(args[1]);
+        final Matcher formatMatcher = AMOUNT_FORMAT.matcher(amountStr);
         if (!formatMatcher.matches()) {
             throw new Exception(tl("numberRequired"));
         }
